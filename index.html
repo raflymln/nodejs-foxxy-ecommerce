@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Foxxy - Hosting & Service</title>
+
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta content="Foxxy" property="og:title">
+    <meta content="Foxxy is a cheap and simple digital shop" property="og:description">
+    <meta content="https://foxxy.id" property="og:url">
+    <meta content="assets/img/logo.png" property="og:image">
+    <meta content="#43B581" data-react-helmet="true" name="theme-color">
+
+    <link rel='icon' href='assets/img/head.png'>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+    <nav>
+        <i id="menu" class="fas fa-bars"></i>
+        <h1 id="foxxy">Foxxy</h1>
+    </nav>
+
+    <main>
+        <h1 id="thetitle">Foxxy</h1>
+
+        <div class="row">
+            <section class="left">
+                <img src="assets/img/head.png">
+            </section>
+
+            <section class="right">
+                <h1>Discover <span>Everything</span>.</h1>
+                <p>This is a text about how much I hate fucking around ith CSS when I'm not a pro. I wasted so much time on this issue I don't even mind writing this text. Sure you could use lorem ipsum but why bother, time you enjoy wasting is not wasted.</p>
+
+                <svg id="top-left" class="float" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#E88668" d="M44.8,-13.6C52,7.6,47.6,33.5,32.3,44.6C17,55.8,-9.1,52.1,-30.9,37.5C-52.7,22.9,-70.1,-2.8,-64.2,-22.1C-58.4,-41.5,-29.2,-54.6,-5.2,-52.9C18.8,-51.2,37.6,-34.8,44.8,-13.6Z" transform="translate(100 100)" />
+                </svg>
+
+                <svg id="bottom-right" class="float" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#FFBD59" d="M57.3,-24.6C63.3,-0.2,49.6,24.6,29.3,39.1C8.9,53.7,-18.1,57.9,-36.6,45.6C-55,33.4,-64.9,4.5,-57.3,-22C-49.8,-48.5,-24.9,-72.7,0.4,-72.8C25.7,-73,51.4,-49,57.3,-24.6Z" transform="translate(100 100)" />
+                </svg>
+            </section>
+        </div>
+
+        <div id="flyingclouds">
+            <div data-depth="0.2" class="cloud x1"></div>
+            <div data-depth="0.3" class="cloud x2"></div>
+            <div data-depth="0.4" class="cloud x3"></div>
+            <div data-depth="0.5" class="cloud x4"></div>
+            <div data-depth="0.6" class="cloud x5"></div>
+        </div>
+
+        <div id="separator">
+            <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; min-width: 100%;">
+                <path d="M-4.28,69.36 C150.00,150.00 323.59,-68.77 500.00,49.99 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path>
+            </svg>
+        </div>
+    </main>
+
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+    <h1>asdasdsa</h1>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        var mobile = false;
+        var scrolled = false;
+
+        if (/Mobi|Android/i.test(navigator.userAgent)) {
+            mobile = true
+            $('nav').css('width', '100%')
+        }
+        console.log("[DEBUG] Mobile: ", mobile);
+
+        $(window).scroll(function() {
+            const scrollLength = $(document).scrollTop();
+
+            $('main #flyingclouds').css('margin-top', scrollLength / 1.4);
+            if (!mobile) {
+                $('main .row section').css('margin-top', scrollLength);
+            } else {
+                $('main .row section.left').css('margin-top', scrollLength / 3);
+            }
+
+            if (scrollLength > 20) {
+                if (!scrolled) {
+                    $('#menu').css('border-radius', '7px 0 0 7px');
+                    $('#foxxy').addClass('show');
+                    $('#thetitle').addClass('hide');
+                    setTimeout(() => $('#foxxy').css('width', '100%'), 300);
+                    setTimeout(() => $('#foxxy').append(`&nbsp; <img src="assets/img/head.png" height="40">`), 450);
+                    scrolled = true;
+                }
+            } else {
+                if (scrolled) {
+                    $('#menu').css('border-radius', '7px');
+                    $('#foxxy').css('width', '0');
+                    $('#thetitle').removeClass('hide');
+                    $('#foxxy').html('Foxxy')
+                    setTimeout(() => $('#foxxy').removeClass('show'), 300);
+                    scrolled = false;
+                }
+            }
+
+        });
+    </script>
+</body>
+
+</html>
