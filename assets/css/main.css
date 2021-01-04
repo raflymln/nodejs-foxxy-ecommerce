@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Karma:wght@500&display=swap');
 @font-face {
     font-family: moontime;
     src: url(../fonts/MoonTime.ttf);
@@ -23,37 +24,108 @@ body {
     margin: 0px;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    /* overflow: hidden; */
 }
-
-* {}
 
 *:focus,
 *:active {
     outline: none;
 }
 
-nav {
+
+/* LANGUAGE SELECT*/
+
+.languageSelect {
     position: fixed;
-    z-index: 9999;
+    z-index: 9999999999999999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.658);
+}
+
+.languageSelect div {
+    background: white;
+    max-width: 30%;
+    padding: 20px 40px;
+    border-radius: 12px;
+    font-family: 'Rubik', sans-serif;
+    color: #E88668;
+    border: solid 4px rgba(224, 166, 99, 0.658);
+    text-align: center;
+}
+
+.languageSelect div h2,
+.languageSelect div h4 {
+    margin: 0;
+}
+
+.languageSelect div h2 s {
+    color: #a84f33;
+}
+
+.languageSelect div h4 {
+    color: #5f5f5f
+}
+
+.languageSelect div button {
+    width: 100%;
+    margin-top: 10px;
+    padding: 5px;
+    font-family: 'Rubik', sans-serif;
+    color: #fff;
+    font-weight: 500;
+    font-size: 18px;
+    border-radius: 12px;
+    /* filter: drop-shadow(1px 2px 1px rgb(131, 126, 126)); */
+    box-shadow: 3px 3px 2px rgb(131, 126, 126);
+    border: none;
+    transition: 0.4s;
+}
+
+.languageSelect div button:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 2px rgb(131, 126, 126);
+    opacity: 0.8;
+}
+
+.languageSelect div button:focus {
+    box-shadow: none;
+}
+
+@media only screen and (max-width: 768px) {
+    .languageSelect div {
+        max-width: 60%;
+    }
+}
+
+
+/* NAV */
+
+nav {
+    position: absolute;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     text-align: center;
     width: auto;
     filter: drop-shadow(1px 2px 5px rgb(131, 126, 126));
-    height: 70px;
+    max-height: 70px;
     padding: 20px;
     transition: 0.8s;
     box-sizing: border-box;
+    z-index: 9999999;
 }
 
-nav #menu:hover {
+nav .bar:hover {
     cursor: pointer;
     color: #fff;
     background: #414141;
 }
 
-nav #menu {
+nav .bar {
     font-size: 20px;
     height: 100%;
     display: flex;
@@ -66,7 +138,7 @@ nav #menu {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.48);
 }
 
-nav h1 {
+nav .title {
     font-family: 'moontime';
     font-size: 40px;
     display: flex;
@@ -84,11 +156,10 @@ nav h1 {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.48);
 }
 
-nav h1.show {
-    opacity: 1;
-}
 
-main {
+/* header */
+
+header {
     height: 100%;
     width: 100%;
     background: rgb(255, 147, 89);
@@ -105,12 +176,12 @@ main {
 }
 
 @media only screen and (max-width: 768px) {
-    main {
-        height: 120%;
+    header {
+        height: 140%;
     }
 }
 
-main h1#thetitle {
+header .title {
     position: absolute;
     top: 10px;
     font-family: 'moontime';
@@ -121,27 +192,31 @@ main h1#thetitle {
     transition: opacity 1s;
 }
 
-main h1#thetitle.hide {
+header .title.hide {
     opacity: 0;
 }
 
-main div#separator {
+header div#separator {
     position: absolute;
     bottom: 0;
     left: 0;
     height: 100px;
     min-width: 100%;
     overflow: hidden;
+    z-index: 999999;
 }
 
-main div#flyingclouds {
+header div#separator2 {
     position: absolute;
-    padding-top: 150px;
-    top: 0;
+    bottom: 5px;
     left: 0;
+    height: 100px;
+    min-width: 100%;
+    overflow: hidden;
+    z-index: 99999;
 }
 
-main .row {
+header .row {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -154,7 +229,7 @@ main .row {
     flex-wrap: wrap;
 }
 
-main .row section {
+header .row section {
     -webkit-box-flex: 1;
     -moz-box-flex: 1;
     flex: 1;
@@ -169,68 +244,95 @@ main .row section {
 }
 
 @media only screen and (max-width: 500px) {
-    main .row section {
+    header .row section {
         flex: initial
     }
 }
 
-main .row section.left {
+header .row section.left {
     align-items: center;
     justify-content: center;
     width: 100%;
 }
 
-main .row section.left img {
+header .row section.left img {
     max-width: 400px;
     min-width: 220px;
     width: 100%;
     height: auto;
+    filter: drop-shadow(8px 8px 1px #ffbf5f);
 }
 
 @media only screen and (max-width: 768px) {
-    main .row section.left img {
+    header .row section.left img {
         max-width: 280px;
     }
 }
 
-main .row section.right {
+header .row section.right {
     align-items: flex-start;
     justify-content: center;
     color: #Fff;
     position: relative;
 }
 
-main .row section.right svg#top-left {
+header .row section.right svg#top-left {
     position: absolute;
     width: 150px;
     top: 50px;
     left: -80px;
 }
 
-main .row section.right svg#bottom-right {
+header .row section.right svg#bottom-right {
     position: absolute;
     width: 250px;
     bottom: 10px;
     right: -70px;
 }
 
-main .row section.right h1 {
+header .row section.right h1 {
     font-family: 'Rubik', sans-serif;
     font-size: calc(30px + 2vw);
     margin: 0;
     z-index: 999;
 }
 
-main .row section.right h1 span {
+header .row section.right h1 span {
     background: rgba(255, 255, 255, 0.664);
     color: #E88668;
 }
 
-main .row section.right p {
+header .row section.right p {
+    z-index: 999;
+    font-family: 'Karma', serif;
+    font-size: 17px;
+}
+
+header .row section.right button {
+    padding: 12px 20px;
+    color: #E88668;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.432);
+    border: solid 4px white;
+    font-family: 'Rubik', sans-serif;
+    transition: 0.8s;
     z-index: 999;
 }
 
-.cloud {
+header .row section.right button:hover {
+    background: white;
+    cursor: pointer;
+    color: #e97b59;
+}
+
+header .flyingclouds {
+    position: absolute;
+    padding-top: 150px;
+    top: 0;
+    left: 0;
+}
+
+header .flyingclouds .cloud {
     width: 200px;
     height: 60px;
     background: #fff;
@@ -240,8 +342,8 @@ main .row section.right p {
     position: relative;
 }
 
-.cloud:before,
-.cloud:after {
+header .flyingclouds .cloud:before,
+header .flyingclouds .cloud:after {
     content: '';
     position: absolute;
     background: #fff;
@@ -258,7 +360,7 @@ main .row section.right p {
     -moz-transform: rotate(30deg);
 }
 
-.cloud:after {
+header .flyingclouds .cloud:after {
     width: 120px;
     height: 120px;
     top: -55px;
@@ -266,13 +368,13 @@ main .row section.right p {
     right: 15px;
 }
 
-.x1 {
+header .flyingclouds .x1 {
     -webkit-animation: moveclouds 15s linear infinite;
     -moz-animation: moveclouds 15s linear infinite;
     -o-animation: moveclouds 15s linear infinite;
 }
 
-.x2 {
+header .flyingclouds .x2 {
     left: 200px;
     -webkit-transform: scale(0.6);
     -moz-transform: scale(0.6);
@@ -283,7 +385,7 @@ main .row section.right p {
     -o-animation: moveclouds 25s linear infinite;
 }
 
-.x3 {
+header .flyingclouds .x3 {
     left: -250px;
     top: -200px;
     -webkit-transform: scale(0.8);
@@ -295,7 +397,7 @@ main .row section.right p {
     -o-animation: moveclouds 20s linear infinite;
 }
 
-.x4 {
+header .flyingclouds .x4 {
     left: 470px;
     top: -250px;
     -webkit-transform: scale(0.75);
@@ -307,7 +409,7 @@ main .row section.right p {
     -o-animation: moveclouds 18s linear infinite;
 }
 
-.x5 {
+header .flyingclouds .x5 {
     left: -150px;
     top: -150px;
     -webkit-transform: scale(0.8);
