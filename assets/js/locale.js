@@ -2,7 +2,7 @@ $('.languageSelect div button').click(function(e) {
     const lang = e.target.value;
     $('.languageSelect').hide();
     $('body')
-        .css('overflow', 'auto')
+        .css('overflow-y', 'auto')
         .find("[class]").each(function() {
             try {
                 if (this.className.includes('locale')) {

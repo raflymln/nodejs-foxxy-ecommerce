@@ -31,20 +31,27 @@
     </section>
 
     <nav>
-        <i onclick="openNav()" class="bar fas fa-bars"></i>
-        <h1 class="title">Foxxy</h1>
+        <section class="logo">
+            <img src="https://foxxy.id/assets/img/logo.svg">
+            <h1 class="title">Foxxy</h1>
+        </section>
+        <section class="list">
+            <ul id="menulist">
+                <li><i class="fa fa-home"></i> Home</li>
+                <li><i class="fa fa-list"></i> Products</li>
+                <li><i class="fa fa-building"></i> Company</li>
+                <li><i class="fa fa-phone-alt"></i> Support</li>
+            </ul>
+        </section>
+        <section class="quick">
+            <a><i class="fa fa-shopping-cart"></i></a>
+            <a><i class="fa fa-user"></i></a>
+            <a class="menu-button"><i class="fa fa-caret-square-down"></i></a>
+        </section>
+
     </nav>
 
-    <div id="mySidenav" class="sidenav">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
-    </div>
-
     <header>
-        <h1 class="title">Foxxy</h1>
 
         <div class="row">
             <section class="left">
@@ -83,34 +90,90 @@
 
         <div id="separator">
             <svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; min-width: 100%;">
-                <path d="M-4.28,69.36 C150.00,150.00 323.59,-68.77 500.00,49.99 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path>
+                <path d="M-4.28,69.36 C150.00,150.00 323.59,-68.77 500.00,49.99 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #ffeeca;"></path>
             </svg>
         </div>
     </header>
 
     <main>
-        <h1>Why Choose Us?</h1>
-        <h4>There is a plenty reason why, but we'll display 3</h4>
-        <div>1</div>
-        <div>2</div>
-        <div>3</div>
-        <div>2</div>
-        <div>3</div>
-        <div>2</div>
-        <div>3</div>
-        <div>2</div>
-        <div>3</div>
-        <div>2</div>
-        <div>3</div>
+        <div id="intro">
+            <section class="inside">
+                <section class="main">
+                    <span>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                    </span>
+                    <h1>Faster and Cheaper</h1>
+                    <p>
+                        At Foxxy, we understand how important good customer service is. Therefore, we always try to give the best to our prospective buyers. Not only that, the products we offer are also of maximum quality at relatively low prices in their class.
+                    </p>
+                    <button>Learn More</button>
+                    <section class="floating-left-bottom float"><i class="fa fa-star"></i></section>
+                    <section class="floating-right-top float"><i class="fa fa-star"></i></section>
+                </section>
+                <section class="wave"></section>
+            </section>
+            <section class="clear"></section>
+        </div>
+
+        <div id="services">
+            <h1>Our Services</h1>
+            <section class="lists">
+                <div>
+
+                </div>
+            </section>
+        </div>
+
     </main>
+
+    <footer>
+        <div class="footer-left">
+            <h1>Foxxy <img src="https://foxxy.id/assets/img/logo.svg"></h1>
+            <p class="footer-links">
+                <a href='/'>Home</a>
+            </p>
+            <p class="footer-company-name">©2021 Foxxy Development ― Pterodactyl Software</p>
+            <p class="footer-credits">
+                By Dane Everitt, Rafly Maulana, Kagchi & Contributors.
+                <br> All Rights Reserved.
+            </p>
+        </div>
+
+        <div class="footer-center">
+            <div>
+                <i class='fab fa-discord'></i>
+                <p>Discord</p>
+            </div>
+        </div>
+
+        <div class="footer-right">
+            <p class="footer-company-about">
+                <span>Discover Everything</span> Get Your Domain, Server, Game Server, or others such as Streaming Accounts, Premium Accounts, Game Voucher, and so on, only on Foxxy.
+            </p>
+
+            <div class="footer-icons">
+                <a href='/'><i class='fa fa-globe'></i></a>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="assets/js/locale.js"></script>
     <script>
         var mobile = false;
         var scrolled = false;
-        var menuOpened = false;
         $('.defaultLang').click();
+
+        // Menu
+        var menuOpened = false;
+        $('nav .quick a.menu-button').click(function() {
+            $('nav .list').css('display', menuOpened ? 'none' : 'initial');
+            menuOpened = !menuOpened;
+        })
 
         /* MOBILE */
         if (/Mobi|Android/i.test(navigator.userAgent)) {
@@ -133,34 +196,25 @@
             /* SCROLL EFFECT */
             if (scrollLength > 20) {
                 if (!scrolled) {
-                    $('nav .bar').css('border-radius', '7px 0 0 7px');
-                    $('nav .title').css('opacity', '1').css('width', '100%').append(`&nbsp; <img src="assets/img/head.png" height="40">`);
-                    $('header .title').css('opacity', '0');
                     scrolled = true;
                 }
             } else {
                 if (scrolled) {
-                    $('nav .bar').css('border-radius', '7px');
-                    $('nav .title').css('width', '0').html('Foxxy').css('opacity', '0');
-                    $('header .title').css('opacity', '1');
                     scrolled = false;
                 }
             }
-
         });
 
 
-        function openNav() {
-            document.getElementById("mySidenav").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-            $('body').css('background', 'rgba(0,0,0,0.4)')
+        function setIntroClearHeight() {
+            var introClearHeight = $('main #intro .inside .main').height()
+            $('main #intro .clear').css('height', introClearHeight);
         }
 
-        function closeNav() {
-            document.getElementById("mySidenav").style.width = "0";
-            document.getElementById("main").style.marginLeft = "0";
-            document.body.style.backgroundColor = "white";
-        }
+        setIntroClearHeight();
+        $(window).resize(function() {
+            setIntroClearHeight();
+        });
     </script>
 </body>
 
