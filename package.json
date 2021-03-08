@@ -1,0 +1,42 @@
+{
+    "name": "foxxy",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build": "npx tailwindcss-cli@latest build ./public/assets/css/build.css -o ./public/assets/css/tailwind.css",
+        "serve": "node index.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/raflymln/foxxy.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/raflymln/foxxy/issues"
+    },
+    "homepage": "https://github.com/raflymln/foxxy#readme",
+    "dependencies": {
+        "@tailwindcss/forms": "^0.2.1",
+        "@tailwindcss/line-clamp": "^0.2.0",
+        "@vitalets/google-translate-api": "^5.1.0",
+        "autoprefixer": "^10.2.4",
+        "axios": "^0.21.1",
+        "crypto": "^1.0.1",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "express-useragent": "^1.0.15",
+        "glob": "^7.1.6",
+        "http": "0.0.1-security",
+        "md5": "^2.3.0",
+        "node-mysql-wrapper": "^2.9.3",
+        "nodemailer": "^6.4.17",
+        "tailwindcss": "^2.0.3"
+    },
+    "devDependencies": {
+        "@markusantonwolf/tailwind-css-plugin-filters": "^1.2.1",
+        "tailwindcss-blend-mode": "^1.0.0"
+    }
+}

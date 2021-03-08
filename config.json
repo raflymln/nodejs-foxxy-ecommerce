@@ -1,0 +1,28 @@
+{
+    "APP_URL": "http://127.0.0.1:3000",
+    "APP_PORT": 3000,
+
+    "BLOCK_ACCOUNT_REGISTRATION": false,
+    "BLOCK_ACCOUNT_LOGIN": false,
+    "BLOCK_ACCOUNT_VERIFICATION": false,
+    "BLOCK_RESEND_VERIFICATION_EMAIL": false,
+    "BLOCK_FORGOT_PASSWORD": false,
+
+    "DB_HOST": "localhost",
+    "DB_USER": "root",
+    "DB_PASSWORD": "",
+    "DB_NAME": "foxxy",
+
+    "TRIPAY_API_KEY": "DEV-UMYigizUr4ijjR1N8UbWFu5uYjexiIvpO6gJJ7BW",
+    "TRIPAY_PRIVATE_KEY": "t449j-lLXc9-M4Ygd-I7vEv-O90fU",
+    "TRIPAY_MERCHANT_CODE": "T1967",
+
+    "SMTP": {
+        "host": "smtp.ethereal.email",
+        "port": 587,
+        "auth": {
+            "user": "barrett.kovacek72@ethereal.email",
+            "pass": "CrcFA9FTAdxJ1U9eVe"
+        }
+    }
+}

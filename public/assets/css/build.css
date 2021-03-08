@@ -1,0 +1,70 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================
+Fonts
+======================== */
+
+@font-face {
+    font-family: moontime;
+    src: url(../fonts/MoonTime.ttf);
+}
+
+.f-rubik {
+    font-family: 'Rubik', sans-serif !important;
+}
+
+.f-moontime {
+    font-family: 'moontime' !important;
+}
+
+.f-karma {
+    font-family: 'Karma', serif !important;
+}
+
+
+/* =====================
+Main Styles
+======================== */
+
+html,
+body {
+    height: 100%;
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+*:focus,
+*:active {
+    outline: none !important;
+}
+
+
+/* =====================
+Modal Box & Snackbar
+======================== */
+
+.modal {
+    max-width: 80% !important;
+    z-index: 9999;
+}
+
+.blocker {
+    z-index: 999999 !important;
+}
+
+.snackbar-container {
+    z-index: 9999999999 !important;
+}

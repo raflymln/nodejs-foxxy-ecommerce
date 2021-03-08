@@ -1,0 +1,281 @@
+<html>
+
+<head>
+    <title>Foxxy - Hosting & Service</title>
+    <link rel='icon' href='assets/img/logo-full.png'>
+
+    <!-- Meta Tags - Configuration -->
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <meta content="#FFBD59" data-react-helmet="true" name="theme-color">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="robots" content="noindex">
+    <meta name="msapplication-config" content="/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#FFBD59">
+
+    <!-- Meta Tags - Primary -->
+    <meta name="title" content="Foxxy">
+    <meta name="description" content="Get Your Domain, Server, Game Server, or others such as Streaming Accounts, Premium Accounts, Game Voucher, and so on, only on Foxxy.">
+    <meta name="theme-color" content="#FFBD59" data-react-helmet="true">
+
+    <!-- Meta Tags - Open Graph / Facebook / Discord -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://foxxy.id">
+    <meta property="og:title" content="Foxxy">
+    <meta property="og:image" content="https://foxxy.id/assets/img/banner.png">
+    <meta property="og:description" content="Get Your Domain, Server, Game Server, or others such as Streaming Accounts, Premium Accounts, Game Voucher, and so on, only on Foxxy.">
+
+    <!-- Meta Tags - Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://foxxy.id">
+    <meta property="twitter:title" content="Foxxy">
+    <meta property="twitter:image" content="https://foxxy.id/assets/img/banner.png">
+    <meta property="twitter:description" content="Get Your Domain, Server, Game Server, or others such as Streaming Accounts, Premium Accounts, Game Voucher, and so on, only on Foxxy.">
+
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="assets/css/tailwind.css">
+    <link rel="stylesheet" href="assets/css/markdown.css">
+
+    <link rel="stylesheet" href="assets/vendor/css/fontawesome.css">
+    <link rel="stylesheet" href="assets/vendor/css/animate.min.css">
+
+    <link rel="stylesheet" href="assets/vendor/css/countrySelect.min.css">
+    <link rel="stylesheet" href="assets/vendor/css/intlTelInput.min.css">
+
+    <link rel="stylesheet" href="assets/vendor/css/snackbar.min.css">
+    <link rel="stylesheet" href="assets/vendor/css/jquery.modal.min.css" />
+
+    <!-- <link rel="stylesheet" href="https://api.foxxy.id/assets/css/livechat.css"> -->
+
+    <!-- LINK - Fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Karma:wght@300;500;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Addon Stylesheet -->
+    <style>
+        /* .goog-te-banner-frame.skiptranslate {
+            display: none !important;
+        }
+        
+        body {
+            top: 0px !important;
+        } */
+    </style>
+</head>
+
+<body class="relative">
+    <!-- Loader Page Blocker -->
+    <section id="page-blocker" class="fixed top-0 left-0 w-full h-full hidden cursor-wait" style="z-index: 999999999999999999999999999999;"></section>
+
+    <!-- Loading Bar -->
+    <section class="loader fixed top-0 left-0 w-full z-100 h-1 blend-screen">
+        <div class="loaded h-full w-0 bg-yellow-600" style="transition: width 0.8s, opacity 0.6s;"></div>
+    </section>
+
+    <!-- Navbar -->
+    <nav class="navigation shadow w-full" style="transition: background-color 500ms linear;">
+        <div class="container max-w-screen-xl mx-auto px-6 lg:px-8 py-3 md:flex md:justify-between md:items-center">
+            <div class="flex items-center justify-between">
+                <div>
+                    <a class="text-xl font-bold text-gray-800 md:text-2xl hover:text-gray-700" rel="page" href="home">
+                        <img src="./assets/img/logo.svg" class="max-h-12 cursor-pointer hover:opacity-80">
+                    </a>
+                </div>
+
+                <div class="flex md:hidden">
+                    <button type="button" class="text-gray-500 hover:text-gray-600 focus:outline-none focus:text-gray-600" id="mobile-menu-button">
+                        <svg viewBox="0 0 24 24" class="w-6 h-6 fill-current">
+                            <path fill-rule="evenodd"
+                                d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z">
+                            </path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="items-center md:flex hidden" id="mobile-menu">
+                <div class="flex flex-col md:flex-row md:mx-6 space-y-2 md:space-y-0 my-2 md:my-0">
+                    <a class="text-sm font-medium text-gray-700 hover:opacity-80 md:mx-4 md:my-0 cursor-pointer" rel="page" href="home">
+                        Home
+                    </a>
+                    <a class="text-sm font-medium text-gray-700 hover:opacity-80 md:mx-4 md:my-0 cursor-pointer" rel="page" href="about">
+                        About
+                    </a>
+                    <div class="relative group md:mx-4 md:my-0 text-gray-700" x-data="{open: false}">
+                        <a @click="open = !open" @click.away="open = false" class="text-sm font-medium hover:opacity-80 cursor-pointer">
+                            <span>Support <i class="fa fa-chevron-down pl-1 text-xs"></i></span>
+                        </a>
+
+                        <div x-show="open" class="absolute z-10 mt-3 bg-grey-200 block md:w-max w-full">
+                            <div class="p-4 bg-white shadow-lg rounded-md text-sm font-medium blend-screen border-t-4 border-gray-300">
+                                <div class="grid grid-cols-1 gap-2 space-y-2">
+                                    <a class="hover:opacity-80 cursor-pointer" rel="page" href="contact-us">Contact us</a>
+                                    <a class="hover:opacity-80 cursor-pointer" rel="page" href="faq">FAQ</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="relative group md:mx-4 md:my-0 text-gray-700" x-data="{open: false}">
+                        <a @click="open = !open" @click.away="open = false" class="text-sm font-medium hover:opacity-80 cursor-pointer">
+                            <span>Legal <i class="fa fa-chevron-down pl-1 text-xs"></i></span>
+                        </a>
+
+                        <div x-show="open" class="absolute z-10 mt-3 bg-grey-200 block md:w-max w-full">
+                            <div class="p-4 bg-white shadow-lg rounded-md text-sm font-medium blend-screen border-t-4 border-gray-300">
+                                <div class="grid grid-cols-1 gap-2 space-y-2">
+                                    <a class="hover:opacity-80 cursor-pointer" rel="page" href="privacy-policy">Privacy Policy</a>
+                                    <a class="hover:opacity-80 cursor-pointer" rel="page" href="terms-of-service">Terms of Service</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex flex-row justify-center">
+                    <a class="relative text-gray-700 hover:text-gray-600 mr-4">
+                        <i class="fa fa-shopping-cart text-xl"></i>
+                        <span class="absolute -top-0 -left-0 p-1 text-xs text-white bg-yellow-600 rounded-full"></span>
+                    </a>
+                    <a class="relative text-gray-700 hover:text-gray-600" href="components/forms/login.html" rel="modal:open">
+                        <i class="fa fa-user text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Body -->
+    <section class="body animate__animated animate__fadeInRight min-h-full"></section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-50 text-gray-900 px-6 lg:px-8 py-12 f-rubik z-100 relative max-w-screen-xl mx-auto">
+        <div class="mb-12 lg:mb-16">
+            <img class="h-12 cursor-pointer hover:opacity-80" src="assets/img/logo.svg">
+            <ul class="space-y-2">
+                <li>
+                    <h1 class="font-bold text-2xl text-gray-700 mt-2">Discover Everything</h1>
+                </li>
+                <li>
+                    <input type="text" id="country" class="cursor-pointer rounded-sm border-gray-400" readonly>
+                </li>
+                <li>
+                    <label class="inline-flex items-center mt-3">
+                        <input id="translate" type="checkbox" class="form-checkbox h-5 w-5 text-gray-600">
+                        <span class="ml-2 text-gray-700">Translate Page</span>
+                    </label>
+                </li>
+            </ul>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-x-8">
+            <div class="max-w-md">
+                <h5 class="text-xl font-semibold text-gray-700">Payment Method</h5>
+                <section class="mt-4 flex flex-row flex-wrap" id="payment-method">
+                </section>
+            </div>
+            <div>
+                <h5 class="text-xl font-semibold text-gray-700">Sitemap</h5>
+                <section class="mt-4">
+                    <ul class="space-y-2 text-gray-600">
+                        <li>
+                            <a class="font-normal text-base hover:text-gray-400 cursor-pointer" rel="page" href="home">Home</a>
+                        </li>
+                        <li>
+                            <a class="font-normal text-base hover:text-gray-400 cursor-pointer" rel="page" href="about">About
+                                Us</a>
+                        </li>
+                        <li>
+                            <a class="font-normal text-base hover:text-gray-400 cursor-pointer" rel="page" href="contact-us">Contact Us</a>
+                        </li>
+                        <li>
+                            <a class="font-normal text-base hover:text-gray-400 cursor-pointer" rel="page" href="faq">Frequently Asked Question</a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <div>
+                <h5 class="text-xl font-semibold text-gray-700">About Us</h5>
+                <section class="mt-4">
+                    <ul class="space-y-2 text-gray-600">
+                        <li>
+                            <a class="font-normal text-base hover:text-gray-400 cursor-pointer" rel="page" href="about">Who are we?</a>
+                        </li>
+                        <li>
+                            <a class="font-normal text-base hover:text-gray-400 cursor-pointer" rel="page" href="partner">Work with us</a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+            <div>
+                <h5 class="text-xl font-semibold text-gray-700">Legal</h5>
+                <section class="mt-4">
+                    <ul class="space-y-2 text-gray-600">
+                        <li>
+                            <a class="font-normal text-base hover:text-gray-400 cursor-pointer" rel="page" href="privacy-policy">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a class="font-normal text-base hover:text-gray-400 cursor-pointer" rel="page" href="terms-of-service">Terms of Service</a>
+                        </li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+
+        <div class="max-w-screen-xl mx-auto flex flex-col md:flex-row justify-between items-center space-y-4 mt-8 lg:mt-16">
+            <section class="flex flex-nowrap space-x-1 md:space-x-2 list-none">
+                <div class="text-sm space-y-4 md:space-y-1 text-center md:text-left">
+                    <p>&copy;2021 Foxxy. All rights reserved</p>
+                    <p class="text-gray-500">Any trademarks used belong to their respective owners.</p>
+                </div>
+            </section>
+            <section class="flex items-center space-x-2">
+                <a class="hover:text-gray-500">
+                    <span class="sr-only">Facebook</span>
+                    <i class="fab fa-facebook text-xl"></i>
+                </a>
+                <a class="hover:text-gray-500">
+                    <span class="sr-only">Instagram</span>
+                    <i class="fab fa-instagram text-xl"></i>
+                </a>
+                <a class="hover:text-gray-500">
+                    <span class="sr-only">Twitter</span>
+                    <i class="fab fa-twitter text-xl"></i>
+                </a>
+            </section>
+        </div>
+    </footer>
+
+    <!-- Google Translate -->
+    <div id="google_translate_element" style="opacity: 0 !important; display: none !important;"></div>
+
+    <script src="data/country.js"></script>
+
+    <script src="assets/vendor/js/jquery.min.js"></script>
+    <script src="assets/vendor/js/kutty.min.js"></script>
+
+    <script src="assets/vendor/js/jquery.modal.min.js"></script>
+    <script src="assets/vendor/js/snackbar.min.js"></script>
+
+    <script src="assets/vendor/js/showdown.min.js"></script>
+    <script src="assets/vendor/js/currencyFormatter.min.js"></script>
+    <script src="assets/vendor/js/money.min.js"></script>
+
+    <script src="assets/vendor/js/countrySelect.min.js"></script>
+    <script src="assets/vendor/js/intlTelInput.min.js"></script>
+    <script src="assets/vendor/js/intlTelInput-utils.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/color-thief/2.3.0/color-thief.umd.js"></script>
+    <script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script src="assets/js/functions.js"></script>
+    <script src="assets/js/classes.js"></script>
+    <script src="assets/js/main.js"></script>
+
+
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.2/socket.io.js" integrity="sha512-YybopSVjZU0fe8TY4YDuQbP5bhwpGBE/T6eBUEZ0usM72IWBfWrgVI13qfX4V2A/W7Hdqnm7PIOYOwP9YHnICw==" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://api.foxxy.id/assets/js/livechat.js"></script> -->
+</body>
+
+</html>
