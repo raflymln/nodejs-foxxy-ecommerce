@@ -1,8 +1,9 @@
 module.exports = class Session {
     constructor() {
         this.data = new Object;
+        this.timeout = 60 * 60 * 1000; // 1 Hour
 
-        setInterval(() => this.utils.handleInactiveSession(), 30000);
+        setInterval(() => this.utils.handleInactiveSession(), 5 * 60 * 1000);
     }
 
     get all() {
@@ -29,7 +30,7 @@ module.exports = class Session {
         return this.data[ip] = Object.assign({
             _session: {
                 created: Date.now(),
-                expired: Date.now() + (expired || (1000 * 60 * 60 * 24))
+                expired: Date.now() + (expired || this.timeout)
             }
         }, data);
     }
@@ -71,8 +72,9 @@ module.exports = class Session {
         },
         handleInactiveSession: () => {
             Object.keys(this.data).map((ip) => {
-                if (this.data[ip]._session.expired == Date.now()) {
-                    delete this.data[ip]
+                if (Date.now() >= this.data[ip]._session.expired) {
+                    delete this.data[ip];
+                    console.log('Deleting inactive session for IP: ' + ip)
                 }
             });
 

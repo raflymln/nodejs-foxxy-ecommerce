@@ -1,0 +1,30 @@
+<style>
+    @media screen and (max-width:640px) {
+        .modal {
+            padding: 0 !important;
+        }
+    }
+</style>
+
+<section class="container max-w-screen-sm mx-auto px-6 lg:px-8 py-6 f-rubik">
+    <div class="mb-8 text-center">
+        <img class="mx-auto max-h-28 w-auto" src="assets/img/logo.svg">
+        <h1 class="my-3 text-3xl font-bold">Resend Verification Email</h1>
+    </div>
+    <form onsubmit="return form.auth(this, 'resend-verification-email');" class="space-y-12">
+        <div class="space-y-4">
+            <div>
+                <label for="email" class="block mb-2 text-sm">Email address</label>
+                <input required type="email" name="email" id="email" placeholder="Email" class="w-full px-3 py-2 border rounded-md border-gray-300 bg-gray-50 text-gray-800">
+            </div>
+        </div>
+        <div class="space-y-2">
+            <div>
+                <button type="submit" class="w-full px-8 py-3 rounded-md bg-yellow-600 text-gray-50">Resend Email</button>
+            </div>
+            <p class="text-sm text-center text-gray-600">Already have an account?
+                <a href="components/forms/login.html" rel="modal:open" class="hover:underline text-yellow-600">Sign in</a>.
+            </p>
+        </div>
+    </form>
+</section>
