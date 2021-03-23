@@ -19,14 +19,8 @@ module.exports = {
                     account.verified = true;
                     account.token = null;
                     db.table("members").save(account);
-
-                    return res.redirect('/');
-                } else {
-                    return res.send({
-                        message: 'Failed to verify your account, please resend verification email or contact web admin!',
-                        status: 400
-                    })
                 }
+                return res.redirect('/');
             } else {
                 return res.send({
                     message: 'Failed to verify your account, please resend verification email or contact web admin!',

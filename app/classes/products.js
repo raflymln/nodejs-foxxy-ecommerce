@@ -15,8 +15,8 @@ class Product {
 
             for (var product of productListDB) {
                 if (product.categoryId == category.id) {
-                    product = await this.parseProduct(product);
                     product.categoryName = category.name;
+                    product = await this.parseProduct(product);
 
                     category.list[product.id] = product;
                     category.tags = category.tags.concat(product.tags)
@@ -43,11 +43,11 @@ class Product {
     }
 
     async parseProduct(product) {
-        product.extendable = Boolean(product.extendable);
-        product.stackable = Boolean(product.stackable);
         product.tags = this.parseTag(product);
         product.score = 0;
+        product.totalStock = 0;
         product.reviews = [];
+        product.variants = [];
 
         const reviews = await this.database.table("product_reviews").find({ product_id: product.id });
         if (reviews.length > 0) {
@@ -63,6 +63,26 @@ class Product {
             }
             product.score = Math.round(product.score / reviews.length);
         }
+
+        const store = await this.database.table("store").find({ id: product.storeId });
+        product.store = store[0];
+
+        const variants = await this.database.table("product_variants").find({ product_id: product.id });
+        for (const variant of variants) {
+            variant.extendable = Boolean(variant.extendable);
+            variant.stackable = Boolean(variant.stackable);
+
+            if (!variant.extendable && variant.setupPrice) {
+                variant.extendable = false;
+                variant.price += variant.setupPrice;
+                variant.setupPrice = 0;
+            }
+
+            product.variants.push(variant);
+            product.totalStock += variant.stock;
+        }
+
+        product.variants = product.variants.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
 
         return product;
     }

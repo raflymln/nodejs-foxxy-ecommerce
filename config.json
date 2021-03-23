@@ -1,15 +1,17 @@
 {
-    "APP_URL": "https://foxxy.id",
+    "APP_URL": "http://foxxy.id",
     "APP_PORT": 3000,
 
-    "BLOCK_ACCOUNT_REGISTRATION": true,
-    "BLOCK_ACCOUNT_LOGIN": true,
-    "BLOCK_ACCOUNT_VERIFICATION": true,
-    "BLOCK_RESEND_VERIFICATION_EMAIL": true,
-    "BLOCK_FORGOT_PASSWORD": true,
-    "BLOCK_CHANGE_PASSWORD": true,
-    "BLOCK_TRANSACTION": true,
-    "BLOCK_EMAIL_SUBSCRIPTION": true,
+    "SITE_MAINTENANCE": true,
+
+    "BLOCK_ACCOUNT_REGISTRATION": false,
+    "BLOCK_ACCOUNT_LOGIN": false,
+    "BLOCK_ACCOUNT_VERIFICATION": false,
+    "BLOCK_RESEND_VERIFICATION_EMAIL": false,
+    "BLOCK_FORGOT_PASSWORD": false,
+    "BLOCK_CHANGE_PASSWORD": false,
+    "BLOCK_TRANSACTION": false,
+    "BLOCK_EMAIL_SUBSCRIPTION": false,
 
     "DB_HOST": "localhost",
     "DB_USER": "root",
@@ -23,9 +25,10 @@
 
     "SMTP": {
         "host": "",
-        "port": 0,
+        "port": 587,
         "auth": {
             "user": "",
             "pass": ""
         }
     }
+}

@@ -44,17 +44,24 @@ module.exports = {
             var totalAmount = 0;
             for (const cart of carts) {
                 const product = await products.get(cart.productId);
+                const variant = product.variants.find(x => x.id == cart.productVariantId);
 
-                if (product) {
+                if (product && variant) {
+                    const sku = `FOXXY-CG${product.categoryId}PL${product.id}PV${variant.id}`;
+
                     productList.push({
-                        sku: product.id,
-                        name: product.name,
-                        price: (product.price + product.setupPrice),
+                        sku,
+                        id: product.id,
+                        variantId: variant.id,
+                        name: `${product.name} | ${variant.name}`,
+                        price: (variant.price + variant.setupPrice),
                         quantity: cart.quantity,
-                        store: product.store,
-                        duration: product.duration,
+                        storeID: product.store.id,
+                        usageDuration: variant.usageDuration,
+                        warrantyDuration: variant.warrantyDuration,
+                        info: cart.additionalInformation
                     });
-                    totalAmount += (cart.quantity * (product.price + product.setupPrice));
+                    totalAmount += (cart.quantity * (variant.price + variant.setupPrice));
                 }
 
                 db.table("carts").remove(cart.id)
@@ -94,19 +101,22 @@ module.exports = {
                 const data = request.data.data;
 
                 for (const product of productList) {
-                    const expired = parseInt(product.duration) * 24 * 60 * 60 * 1000;
+                    const usageExpired = parseInt(product.usageDuration) * 24 * 60 * 60 * 1000;
+                    const warrantyExpired = parseInt(product.warrantyDuration) * 24 * 60 * 60 * 1000;
                     db.table('transactions').save({
                         member_id: user.id,
+                        store_id: product.storeID,
                         transaction_id: data.reference,
-                        transaction_additional_information: params.additional_info,
-                        product_id: product.sku,
+                        transaction_additional_information: product.info,
+                        product_id: product.id,
+                        product_variant_id: product.variantId,
                         product_amount: product.quantity,
-                        product_store: product.store,
                         product_price: product.price,
                         payment_method: `TRIPAY-${data.payment_method}`,
                         payment_gateway: data.checkout_url,
                         date_purchased: new Date(Date.now()).toUTCString(),
-                        date_expired: new Date(Date.now() + expired).toUTCString()
+                        date_product_expired: new Date(Date.now() + usageExpired).toUTCString(),
+                        date_warranty_expired: new Date(Date.now() + warrantyExpired).toUTCString()
                     })
                 }
 

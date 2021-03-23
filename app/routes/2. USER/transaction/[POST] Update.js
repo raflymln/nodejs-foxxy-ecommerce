@@ -15,18 +15,30 @@ module.exports = {
             if (transactions.length > 0) {
                 for (const transaction of transactions) {
                     transaction.paymentStatus = params.status;
-                    db.table("transactions").save(transaction);
 
                     if (params.status == 'PAID') {
-                        const products = await db.table("product_list").find({
-                            id: transaction.productId
+                        const products = await db.table("product_variants").find({
+                            id: transaction.productVariantId
                         });
 
                         if (products.length > 0) {
                             products[0].stock -= transaction.productAmount;
-                            db.table("product_list").save(products[0]);
+                            db.table("product_variants").save(products[0]);
+                        }
+
+                        const stock = await db.table("product_stocks").find({
+                            product_id: transaction.productId,
+                            product_variant_id: transaction.productVariantId
+                        });
+
+                        if (stock.length > 0) {
+                            transaction.productDescription = stock[0].description;
+                            transaction.productStatus = 'ACTIVE';
+                            db.table("product_stocks").remove(stock[0]);
                         }
                     }
+
+                    db.table("transactions").save(transaction);
                 }
             }
         }

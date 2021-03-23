@@ -32,13 +32,15 @@ module.exports = {
 
             if (account.length > 0) {
                 if (account[0].verified == false) {
-                    const transporter = nodemailer.createTransport(req.app.config.SMTP);
                     const verifyUrl = req.app.config.APP_URL + '/user/auth/verify/' + account[0].username + '/' + account[0].token;
+                    const mailHTML = require('../../../templates/mail-register')(account[0].username, verifyUrl);
+
+                    const transporter = nodemailer.createTransport(req.app.config.SMTP);
                     const mail = await transporter.sendMail({
                         from: '"Foxxy Indonesia" <noreply@foxxy.id>',
                         to: params.email,
-                        subject: "Thank you for signing up!",
-                        html: `Please verify your email at: <a href='${verifyUrl}'>${verifyUrl}</a>`,
+                        subject: `Please Verify Your Account, ${account[0].username}`,
+                        html: mailHTML,
                     });
 
                     ratelimit.add(req, 5 * 60);

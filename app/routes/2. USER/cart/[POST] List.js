@@ -21,10 +21,14 @@ module.exports = {
 
                 for (const cart of carts) {
                     const product = await products.get(cart.productId);
-                    if (product) {
+                    const variant = product.variants.find(x => x.id == cart.productVariantId);
+
+                    if (product && variant) {
                         list.push(Object.assign({
                             cartId: cart.id,
-                            quantity: cart.quantity
+                            quantity: cart.quantity,
+                            information: cart.additionalInformation,
+                            variant
                         }, product))
                     }
                 }

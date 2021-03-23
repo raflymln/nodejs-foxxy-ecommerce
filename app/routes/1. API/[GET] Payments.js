@@ -7,7 +7,7 @@ module.exports = {
     run: async(req, res, sess, db) => {
         try {
             if (!payments || (Date.now() - updatedAt > (1000 * 60 * 60 * 2))) {
-                const response = await axios.get('https://payment.tripay.co.id/api-sandbox/merchant/payment-channel', {
+                const response = await axios.get(`https://payment.tripay.co.id/${req.app.config.TRIPAY_SANDBOX ? 'api-sandbox' : 'api'}/merchant/payment-channel`, {
                     headers: {
                         'Authorization': `Bearer ${req.app.config.TRIPAY_API_KEY}`
                     }

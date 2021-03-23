@@ -12,26 +12,35 @@ module.exports = {
             }
 
             const params = req.body;
-            params.quantity = parseInt(params.quantity) || 1;
+            params.quantity = parseInt(params.quantity);
 
-            if (params.quantity > 50) {
-                return res.send({
-                    message: 'Please contact admin for a big purchase!',
+            if (isNaN(params.quantity)) {
+                res.send({
+                    message: "Invalid Quantity",
                     status: 400
-                });
+                })
             }
 
             const products = require('../../../classes/products')(db);
             const product = await products.get(params.productID);
 
             if (product) {
+                const variant = product.variants.find(x => x.id == params.variantID);
+                if (!variant) {
+                    return res.send({
+                        message: "Variant not Found!",
+                        status: 404
+                    })
+                }
+
                 const cart = db.table("carts");
                 const cartList = await cart.find({
                     member_id: user.id,
-                    product_id: params.productID
+                    product_id: params.productID,
+                    product_variant_id: variant.id
                 });
 
-                if (params.quantity > product.stock) {
+                if (params.quantity > variant.stock) {
                     return res.send({
                         message: 'You cannot add more than the available product stock!',
                         status: 400
@@ -43,15 +52,15 @@ module.exports = {
                     totalCartAmount += list.quantity;
                 }
 
-                if (totalCartAmount >= product.stock) {
+                if (totalCartAmount >= variant.stock) {
                     return res.send({
                         message: 'You have reached max amount of that product in your cart!',
                         status: 400
                     });
                 }
 
-                if ((cartList.length > 0) && product.stackable) {
-                    if ((params.quantity + totalCartAmount) > product.stock) {
+                if ((cartList.length > 0) && variant.stackable) {
+                    if ((params.quantity + totalCartAmount) > variant.stock) {
                         return res.send({
                             message: 'You cannot add more than the available product stock, please check your cart!',
                             status: 400
@@ -61,16 +70,16 @@ module.exports = {
                     cartList[0].quantity += params.quantity
                     cart.save(cartList[0]);
                 } else {
-                    if (!product.stackable) {
-                        if ((params.quantity + totalCartAmount) > product.maximumPurchase) {
-                            if ((totalCartAmount > 0) && (totalCartAmount <= product.maximumPurchase)) {
+                    if (!variant.stackable) {
+                        if ((params.quantity + totalCartAmount) > variant.maximumPurchase) {
+                            if ((totalCartAmount > 0) && (totalCartAmount <= variant.maximumPurchase)) {
                                 return res.send({
-                                    message: `Maximum purchase of this product is ${product.maximumPurchase} items, please check your cart!`,
+                                    message: `Maximum purchase of this product is ${variant.maximumPurchase} items, please check your cart!`,
                                     status: 400
                                 });
                             }
                             return res.send({
-                                message: `Maximum purchase of this product is ${product.maximumPurchase} items, please contact us for large purchases!`,
+                                message: `Maximum purchase of this product is ${variant.maximumPurchase} items, please contact us for large purchases!`,
                                 status: 400
                             });
                         }
@@ -79,6 +88,7 @@ module.exports = {
                             cart.save({
                                 member_id: user.id,
                                 product_id: params.productID,
+                                product_variant_id: variant.id,
                                 quantity: 1
                             })
                         }
@@ -86,6 +96,7 @@ module.exports = {
                         cart.save({
                             member_id: user.id,
                             product_id: params.productID,
+                            product_variant_id: variant.id,
                             quantity: params.quantity
                         })
                     }

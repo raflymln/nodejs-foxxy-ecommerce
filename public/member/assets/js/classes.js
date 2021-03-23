@@ -94,7 +94,7 @@ class Transaction {
                 for (const transaction of response.data) {
                     this.data[transaction.id] = transaction;
 
-                    $('#transaction-list').append(`
+                    $('#transaction-list').prepend(`
                         <tr>
                             <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                 <div class="flex items-center">
@@ -140,7 +140,7 @@ class Transaction {
         })
     }
 
-    reload() {
+    reload(notify = true) {
         if ((Date.now() - this.reloadTimeout) < (60 * 1000)) {
             const waitTime = util.millisToMinutesAndSeconds(60 * 1000 - (Date.now() - this.reloadTimeout));
             return alert(`Please wait ${waitTime} before reloading again!`);
@@ -148,12 +148,13 @@ class Transaction {
 
         this.reloadTimeout = Date.now();
         this.list();
-        return alert('Finished Reloading.')
+        return (notify) ? alert('Finished Reloading.') : true;
     }
 
     info(id) {
         const transaction = this.data[id];
         const product = transaction.product;
+        const variant = transaction.variant;
         var description = transaction.productDescription;
 
         if (transaction.paymentStatus == "UNPAID") {
@@ -163,7 +164,8 @@ class Transaction {
         const additionalData = [
             `**Transaction ID:** ${transaction.transactionId}`,
             `**Product Name:** ${product.name}`,
-            `**Store:** ${product.store}`,
+            `**Product Variant:** ${variant.name}`,
+            `**Store:** ${product.store.name}`,
             `**Amount:** ${transaction.productAmount}`,
             `**Total Price:** ${util.formatCurrency(transaction.productPrice)}`,
             `**Payment Method:** ${transaction.paymentMethod}`,
@@ -205,7 +207,8 @@ class Transaction {
     review(transactionID, productID) {
         if (localStorage.reviewTimeout && (Date.now() - localStorage.reviewTimeout) < (60 * 1000)) {
             const waitTime = util.millisToMinutesAndSeconds(60 * 1000 - (Date.now() - localStorage.reviewTimeout));
-            return alert(`Please wait ${waitTime} before reloading again!`);
+            alert(`Please wait ${waitTime} before updating again!`);
+            return false;
         }
 
         const stars = parseInt($('#review-stars').val());
@@ -257,6 +260,7 @@ class Transaction {
             }
         })
 
+        this.reload(false);
         return false;
     }
 

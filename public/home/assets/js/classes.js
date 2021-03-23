@@ -262,13 +262,10 @@ class Products {
             `,
             container: `
                 <section id="category-container-{id}" class="relative my-12 {hidden}">
-                    <section class="flex items-start justify-between flex-col-reverse md:flex-row">
+                    <section class="flex items-start justify-between flex-col-reverse md:flex-row mb-6">
                         <div class="relative z-10">
                             <h1 class="text-xl f-rubik mb-2 font-bold">{name}</h1>
-                            <h1 class="text-base f-rubik mb-4 font-light max-w-screen-sm">{shortDescription}</h1>
-                            <button class="mb-6 text-white bg-gray-800 font-normal rounded-md py-2.5 px-6 shadow-lg f-rubik transition hover:bg-opacity-80 duration-300 ease-in-out" onclick="products.openCategoryDocument({id})">
-                                Learn More
-                            </button>
+                            <h1 class="text-base f-rubik mb-4 font-light max-w-screen-sm">{description}</h1>
                         </div>
 
                         <div class="absolute top-0 right-0 md:relative h-8 md:h-24">
@@ -292,7 +289,7 @@ class Products {
                         <section class="h-28">
                             <span class="w-full flex items-center justify-start pb-2">
                                 <div class="px-2.5 py-1 bg-gray-900 text-white w-auto f-rubik flex items-center justify-center rounded-md">
-                                    <img src="../../assets/img/stores/{store}.png" class="h-3 pr-1">    
+                                    <img src="{storeLogo}" class="h-3 pr-1">    
                                     <p class="text-xs w-full overflow-ellipsis overflow-hidden max-w-full">{store}</p>
                                 </div>
                             </span>
@@ -320,49 +317,66 @@ class Products {
             modalCategoryInfo: `
                 <section>
                     <h1 class="text-xl md:text-2xl font-bold">{name}</h1>
-                    <h3 class="text-sm md:text-base mt-2 text-gray-500">{shortDescription}</h3>
+                    <h3 class="text-sm md:text-base mt-2 text-gray-500">{description}</h3>
                 </section>
             `,
             modalProductInfo: `
                 <section>
                     <div class="px-2.5 py-1 mb-2 bg-gray-900 text-white f-rubik flex items-center justify-center rounded-md w-max">
-                        <img src="../../assets/img/stores/{store}.png" class="h-3 pr-1">
+                        <img src="{storeLogo}" class="h-3 pr-1">
                         <p class="text-xs w-full overflow-ellipsis overflow-hidden max-w-full">{store}</p>
                     </div>
                     <h1 class="text-xl md:text-2xl font-bold">{name}</h1>
-                    <h3 class="text-sm md:text-base text-gray-500">{price}</h3>
-                </section>
-                <section>
-                    <div class="f-rubik mt-4 w-max rounded-md px-1.5 py-0.5 text-xs bg-{setupPriceColor}-500 text-white">
-                        <a rel="page" href="faq#q8" title="Click for Details" class="hover:opacity-70">
-                            <i class="fa fa-info-circle h-3 pr-1"></i>
-                        </a>
-                        <span>{setupPrice}</span>
-                    </div>
-                    
-                    <section class="flex flex-row">
-                        <div class="f-rubik mt-2 w-max rounded-md px-1.5 py-0.5 text-xs bg-{extendableColor}-500 text-white">
-                            <a rel="page" href="faq#q9" title="Click for Details" class="hover:opacity-70">
-                                <i class="fa fa-info-circle h-3 pr-1"></i>
-                            </a>
-                            <span>{extendable}</span>
-                        </div>
-                        
-                        <div class="f-rubik ml-2 mt-2 w-max rounded-md px-1.5 py-0.5 text-xs bg-white text-gray-800">
+
+                    <section class="flex flex-row items-center justify-start mt-1">
+                        <h3 id="modal-product-price" class="text-sm md:text-base text-gray-500"></h3>
+                        <div id="modal-product-usage" class="f-rubik ml-2 flex flex-row items-center justify-center w-max rounded-md px-1.5 py-0.5 text-xs bg-white text-gray-800">
                             <a href="#0" title="Product Duration" onclick="notify('Product Duration')" class="hover:opacity-70">
                                 <i class="fa fa-info-circle h-3 pr-1"></i>
                             </a>
-                            <span>{duration} Days</span>
+                            <span></span>
+                        </div>
+                    </section>
+                </section>
+
+                <section>
+                    <div id="modal-product-setup" class="f-rubik mt-4 w-max rounded-md px-1.5 py-0.5 text-xs text-white">
+                        <a rel="page" href="faq#q8" title="Click for Details" class="hover:opacity-70">
+                            <i class="fa fa-info-circle h-3 pr-1"></i>
+                        </a>
+                        <span></span>
+                    </div>
+                    
+                    <section class="flex flex-col sm:flex-row">
+                        <div id="modal-product-extendable" class="f-rubik mt-2 w-max rounded-md px-1.5 py-0.5 text-xs text-white">
+                            <a rel="page" href="faq#q8" title="Click for Details" class="hover:opacity-70">
+                                <i class="fa fa-info-circle h-3 pr-1"></i>
+                            </a>
+                            <span></span>
+                        </div>
+                        
+                        <div id="modal-product-warranty" class="f-rubik sm:ml-2 mt-2 w-max rounded-md px-1.5 py-0.5 text-xs bg-black text-white">
+                            <a href="#0" title="Product Duration" onclick="notify('Product Warranty Duration')" class="hover:opacity-70">
+                                <i class="fa fa-info-circle h-3 pr-1"></i>
+                            </a>
+                            <span></span>
                         </div>
                     </section>
 
-                    <form onsubmit="return cart.add({productID});" class="flex flex-row">
-                        <input type="number" class="bg-white border-none rounded-md flex items-center justify-start mr-1 w-16 mt-4 px-2 py-1.5 text-gray-800 text-sm" id="modal-product-amount" placeholder="Amount" value="1" min="1" max="{stock}">
+                    <form onsubmit="return cart.add({productID});" class="flex flex-col mt-4 space-y-3 max-w-xs">
+                        <select class="bg-white border-none rounded-md flex items-center justify-start mr-1 w-full mt-4 px-2 py-1.5 text-gray-800 text-sm" id="modal-product-variant"></select>
 
-                        <button class="w-max px-3 py-1.5 bg-white text-gray-800 text-sm lg:text-base mt-4 rounded-md font-bold hover:opacity-70">Add to Cart</button>
+                        <section class="grid grid-cols-3">
+                            <input type="number" class="bg-white border-none rounded-md col-span-1 flex items-center justify-start mr-1 w-full px-2 py-1.5 text-gray-800 text-sm" id="modal-product-amount" placeholder="Amount" value="0" min="1" max="{stock}">
+
+                            <div class="w-full pl-3 col-span-2">
+                                <button class="w-full px-3 py-1.5 bg-white text-gray-800 text-sm lg:text-base rounded-md font-bold hover:opacity-70">Add to Cart</button>
+                            </div>
+                        </section>
                     </form>
 
-                    <p class="mt-2 text-sm">Total Price: <span class="font-bold" id="modal-product-total">{totalPrice}</span></p>
+                    <p class="mt-2 text-sm">Stock: <span class="font-bold" id="modal-product-stock">0</span></p>
+                    <p class="mt-1 text-sm">Total Price: <span class="font-bold" id="modal-product-total">${util.formatCurrency(0)}</span></p>
                 </section>
             `,
             modalProductReview: `
@@ -397,8 +411,9 @@ class Products {
             success: (products) => {
                 this.products = products;
                 this.CTAPRODUCT();
+                $('#product-category, #product-container').empty();
 
-                Object.keys(products).map((categoryID) => {
+                util.shuffleArray(Object.keys(products)).map((categoryID) => {
                     const category = products[categoryID];
 
                     if ((Object.keys(category.list).length > 0) && (!this.currentCategoryID)) {
@@ -418,7 +433,7 @@ class Products {
                         .replace(/{hidden}/g, (category.id == this.currentCategoryID) ? '' : 'hidden')
                         .replace(/{id}/g, category.id)
                         .replace(/{name}/g, category.name)
-                        .replace(/{shortDescription}/g, category.shortDescription)
+                        .replace(/{description}/g, category.description)
                         .replace(/{banner}/g, category.banner)
 
                     $('#product-container').append(containerHTML)
@@ -426,25 +441,25 @@ class Products {
                     // Products
                     Object.keys(category.list).map((productID) => {
                         const product = category.list[productID];
+                        if (product.variants.length === 0) return;
 
                         const itemHTML = this.components.item
                             .replace(/{category}/g, category.name)
                             .replace(/{categoryID}/g, category.id)
-                            .replace(/{hidden}/g, (!product.stock) ? 'hidden' : '')
+                            .replace(/{hidden}/g, (!product.totalStock) ? 'hidden' : '')
                             .replace(/{id}/g, product.id)
                             .replace(/{name}/g, product.name)
-                            .replace(/{stock}/g, product.stock)
-                            .replace(/{stock_color}/g, (product.stock <= 10) ? 'red-500' : 'gray-500')
-                            .replace(/{store}/g, product.store)
+                            .replace(/{stock}/g, product.totalStock)
+                            .replace(/{stock_color}/g, (product.totalStock <= 10) ? 'red-500' : 'gray-500')
+                            .replace(/{store}/g, product.store.name)
+                            .replace(/{storeLogo}/g, product.store.logo)
                             .replace(/{banner}/g, product.banner)
                             .replace(/{label_hidden}/g, (product.label == 'No Label') ? 'hidden' : '')
                             .replace(/{label_name}/g, product.label)
                             .replace(/{label_color}/g, setLabel())
                             .replace(/{stars}/g, setStars())
-                            .replace(/{realprice}/g, product.price)
-                            .replace(/{price}/g, util.formatCurrency(product.price))
-                            .replace(/{shortDescription}/g, product.shortDescription)
-                            .replace(/{longDescription}/g, product.fullDescription);
+                            .replace(/{realprice}/g, product.variants[0].price)
+                            .replace(/{price}/g, util.formatCurrency(product.variants[0].price))
 
                         function setLabel() {
                             switch (product.label) {
@@ -476,7 +491,6 @@ class Products {
 
                         $(`#category-${category.id}`).append(itemHTML);
                     });
-
                 });
             }
         })
@@ -538,53 +552,22 @@ class Products {
         return notify('Cannot find that product!')
     }
 
-    openCategoryDocument(id) {
-        const category = this.products[id];
-        const text = category.fullDescription;
-
-        if (!text) {
-            return notify('No Info Available');
-        }
-
-        const converted = converter.makeHtml(text);
-        const infoHTML = this.components.modalCategoryInfo
-            .replace(/{name}/g, category.name)
-            .replace(/{shortDescription}/g, category.shortDescription);
-
-        $('#modal-product-banner').attr('src', category.banner);
-        $('#modal-product-description').html(converted);
-        $('#modal-product-review').css('display', 'none');
-        $('#modal-product-info')
-            .css('justify-content', 'center')
-            .html(infoHTML);
-
-        modal.open('more-info');
-    }
-
     openProductDocument(categoryID, productID) {
         const product = this.products[categoryID].list[productID];
-        const text = product.fullDescription;
-
-        if (!text) {
-            return notify('No Info Available');
-        }
+        const text = product.description;
 
         const converted = converter.makeHtml(text);
         const infoHTML = this.components.modalProductInfo
             .replace(/{productID}/g, productID)
-            .replace(/{store}/g, product.store)
             .replace(/{name}/g, product.name)
-            .replace(/{stock}/g, product.stock)
-            .replace(/{duration}/g, product.duration)
-            .replace(/{setupPrice}/g, (product.setupPrice == 0) ? 'No Setup Price' : 'Setup Price: ' + util.formatCurrency(product.setupPrice))
-            .replace(/{extendable}/g, (product.extendable) ? 'Extendable' : 'Not Extendable')
-            .replace(/{extendableColor}/g, (product.extendable) ? 'green' : 'yellow')
-            .replace(/{setupPriceColor}/g, (product.setupPrice == 0) ? 'green' : 'red')
-            .replace(/{price}/g, util.formatCurrency(product.price))
-            .replace(/{totalPrice}/g, util.formatCurrency(product.price + product.setupPrice));
+            .replace(/{storeLogo}/g, product.store.logo)
+            .replace(/{store}/g, product.store.name)
+            .replace(/{stock}/g, product.variants[0].stock)
 
         $('#modal-product-banner').attr('src', product.banner);
         $('#modal-product-description').html(converted);
+        $('#modal-product-variant').empty();
+        $('#modal-product-info').html(infoHTML);
 
         $('#modal-product-review')
             .css('display', 'block')
@@ -605,15 +588,48 @@ class Products {
             $('#modal-product-review').append("No Reviews Available");
         }
 
-        $('#modal-product-info')
-            .css('justify-content', 'space-between')
-            .html(infoHTML);
+        modal.open('more-info');
+        for (const variant of product.variants) {
+            $('#modal-product-variant').append(`<option value="${variant.id}">${variant.name}</option>`);
+        }
 
+
+        $('#modal-product-variant').change(() => this.setupLabel(product));
         $("#modal-product-amount").bind('keyup change click', (e) => {
-            this.sumPrice(product.price, product.setupPrice);
+            const variantID = $('#modal-product-variant').val();
+            const variant = product.variants.find(x => x.id == variantID);
+            this.sumPrice(variant.price, variant.setupPrice);
         });
 
-        modal.open('more-info');
+        return this.setupLabel(product);
+    }
+
+    setupLabel(product) {
+        const variantID = $('#modal-product-variant').val();
+        const variant = product.variants.find(x => x.id == variantID);
+
+        $('#modal-product-stock').html(variant.stock)
+        $('#modal-product-price').html(util.formatCurrency(variant.price));
+        $('#modal-product-usage > span').html(`${variant.usageDuration} Days`);
+        $('#modal-product-warranty > span').html(`${variant.warrantyDuration} Days Warranty`);
+
+        if (variant.setupPrice) {
+            $('#modal-product-setup').addClass('bg-red-500').removeClass('bg-green-500');
+            $('#modal-product-setup > span').html(`Setup Price: ${util.formatCurrency(variant.setupPrice)}`)
+        } else {
+            $('#modal-product-setup').removeClass('bg-red-500').addClass('bg-green-500');
+            $('#modal-product-setup > span').html(`No Setup Price`)
+        }
+
+        if (variant.extendable) {
+            $('#modal-product-extendable').removeClass('bg-yellow-500').addClass('bg-green-500');
+            $('#modal-product-extendable > span').html(`Extendable`)
+        } else {
+            $('#modal-product-extendable').addClass('bg-yellow-500').removeClass('bg-green-500');
+            $('#modal-product-extendable > span').html(`Not Extendable`)
+        }
+
+        return this.sumPrice(variant.price, variant.setupPrice);
     }
 
     sumPrice(price, setupPrice = 0) {
@@ -622,6 +638,8 @@ class Products {
             const total = util.formatCurrency(amount * (price + setupPrice));
             $('#modal-product-total').html(total)
         }, 10);
+
+        return true;
     }
 }
 
@@ -697,6 +715,10 @@ class Util {
         }
         return false;
     }
+
+    shuffleArray(array) {
+        return array.sort(() => Math.random() - 0.5);
+    }
 }
 
 class Cart {
@@ -705,32 +727,45 @@ class Cart {
     get components() {
         return {
             cartList: `
+            <section class="w-full flex flex-col">
                 <div class="flex flex-wrap justify-between items-center mt-6 pt-6" id="cart-{cartId}">
                     <div class="flex items-center"> 
                         <img src="{banner}" width="60" class="rounded-full h-12 w-12 object-cover">
                         <div class="flex flex-col ml-3"> 
                             <span class="md:text-md font-medium">{name}</span> 
-                            <span class="text-xs font-light text-gray-400">#{cartId}</span>
+                            <span class="text-xs font-light text-gray-400">{variant}</span>
                         </div>
                     </div>
 
                     <div class="flex justify-center items-center mt-4 sm:mt-0">
-                        <div class="pr-8 flex"> 
+                        <div class="pr-4 sm:pr-8 flex"> 
                             <p class="f-rubik">
                                 <span class="text-xs text-gray-400 font-bold">Qty:</span> 
                                 {quantity}
                             </p>
                         </div>
-                        <div class="pr-8"> 
+                        <div class="pr-4 sm:pr-8"> 
                             <span class="text-sm f-rubik font-medium" data-cartprice="{realPrice}">{price}</span> 
                         </div>
                         <div> 
-                            <a href="#0" onclick="cart.remove({cartId})">
+                            <a href="#0" title="Edit Additional Information" onclick="$('#info-{cartId}').toggleClass('hidden')">
+                                <i class="fa fa-edit text-base font-medium"></i> 
+                            </a>
+                            <a href="#0" title="Remove Product" onclick="cart.remove({cartId})">
                                 <i class="fa fa-times-circle text-base font-medium"></i> 
                             </a>
                         </div>
                     </div>
                 </div>
+
+                <form class="mt-4 space-y-2 hidden" id="info-{cartId}" onsubmit="return cart.updateInfo({cartId})">
+                    <span class="text-xs font-light text-gray-400">Additional Information</span>
+                    <textarea class="resize-y border w-full rounded-md mb-4">{information}</textarea>
+                    <button class="bg-yellow-500 rounded text-white hover:bg-yellow-600 h-12 w-full cursor-pointer">
+                        Update Information
+                    </button>
+                </form>
+            </section>
             `
         }
     }
@@ -759,18 +794,20 @@ class Cart {
 
     listProducts(products) {
         for (const product of products) {
-            const price = product.quantity * (product.price + product.setupPrice);
+            const price = product.quantity * (product.variant.price + product.variant.setupPrice);
 
             const listHTML = this.components.cartList
                 .replace(/{cartId}/g, product.cartId)
                 .replace(/{banner}/g, product.banner)
                 .replace(/{name}/g, product.name)
+                .replace(/{variant}/g, product.variant.name)
                 .replace(/{quantity}/g, product.quantity)
                 .replace(/{price}/g, util.formatCurrency(price))
                 .replace(/{realPrice}/g, price)
+                .replace(/{information}/g, product.information)
 
             $('#cart-list').append(listHTML)
-            $('#cart-empty-prompt').css('display', 'none')
+            $('#cart-empty-prompt').css('display', 'none');
         }
 
         return this.listPayments();
@@ -795,6 +832,26 @@ class Cart {
                 }
             }
         })
+    }
+
+    updateInfo(id) {
+        const info = $(`#info-${id} > textarea`).val() || "No Additional Information";
+
+        if (info.length > 355) {
+            notify('Information is too Long!');
+            return false;
+        }
+
+        request('post', '/user/cart/updateInfo', {
+            cartId: id,
+            additional_info: info
+        }, {
+            success: (response) => {
+                notify(response);
+            }
+        })
+
+        return false;
     }
 
     setPayment(payment) {
@@ -827,7 +884,8 @@ class Cart {
 
     add(productID) {
         const quantity = $('#modal-product-amount').val();
-        request('post', '/user/cart/add', { productID, quantity }, {
+        const variantID = $('#modal-product-variant').val();
+        request('post', '/user/cart/add', { productID, quantity, variantID }, {
             success: (response) => {
                 const config = new Object;
 
@@ -869,8 +927,7 @@ class Cart {
         }
 
         request('post', '/user/transaction/buy', {
-            method: $('#cart-payments-options').val(),
-            additional_info: $("#cart-additional-info").val()
+            method: $('#cart-payments-options').val()
         }, {
             success: (response) => {
                 if (response.status == 200) {

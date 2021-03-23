@@ -40,6 +40,7 @@ module.exports = {
                 });
             }
 
+            params.verified = false;
             params.createdAt = new Date().toUTCString();
             params.password = md5(params.password);
             params.token = md5(Math.random().toString(36).substring(7));
@@ -51,13 +52,15 @@ module.exports = {
                 platform: req.useragent.platform
             });
 
-            const transporter = nodemailer.createTransport(req.app.config.SMTP);
             const verifyUrl = req.app.config.APP_URL + '/user/auth/verify/' + params.username + '/' + params.token;
+            const mailHTML = require('../../../templates/mail-register')(params.username, verifyUrl);
+
+            const transporter = nodemailer.createTransport(req.app.config.SMTP);
             const mail = await transporter.sendMail({
                 from: '"Foxxy Indonesia" <noreply@foxxy.id>',
                 to: params.email,
-                subject: "Thank you for signing up!",
-                html: `Please verify your email at: <a href='${verifyUrl}'>${verifyUrl}</a>`,
+                subject: `Welcome to Foxxy, ${params.username}!`,
+                html: mailHTML,
             });
 
             db.table("members").save(params);

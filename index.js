@@ -27,6 +27,14 @@ glob(__dirname + "/app/routes/**/*.js", {}, function(err, files) {
     });
 });
 
+app.use('*', async(req, res, next) => {
+    if (config().SITE_MAINTENANCE) {
+        return res.send('403 | Site is Under Maintenance.')
+    }
+
+    next();
+})
+
 app.set('trust proxy', 1);
 app.use(useragent.express());
 

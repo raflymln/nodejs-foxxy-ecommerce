@@ -33,6 +33,7 @@ module.exports = {
 
             if (account.length > 0) {
                 const newPassword = generatePassword();
+                const mailHTML = require('../../../templates/mail-forgot-password')(account[0].username, newPassword);
 
                 account[0].password = md5(newPassword);
                 db.table("members").save(account[0]);
@@ -41,8 +42,8 @@ module.exports = {
                 const mail = await transporter.sendMail({
                     from: '"Foxxy Indonesia" <noreply@foxxy.id>',
                     to: params.email,
-                    subject: "Thank you for requesting password resets!",
-                    html: `Here your new password: ${newPassword}`,
+                    subject: `Seems That You Forgot Your Password, ${account[0].username}`,
+                    html: mailHTML
                 });
 
                 ratelimit.add(req, 5 * 60);
