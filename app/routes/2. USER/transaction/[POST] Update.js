@@ -27,7 +27,6 @@ module.exports = {
                         }
 
                         const stock = await db.table("product_stocks").find({
-                            product_id: transaction.productId,
                             product_variant_id: transaction.productVariantId
                         });
 
