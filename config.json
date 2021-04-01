@@ -1,5 +1,5 @@
 {
-    "APP_URL": "http://foxxy.id",
+    "APP_URL": "https://foxxy.id",
     "APP_PORT": 3000,
 
     "SITE_MAINTENANCE": true,
