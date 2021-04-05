@@ -2,7 +2,7 @@
     "APP_URL": "https://foxxy.id",
     "APP_PORT": 3000,
 
-    "SITE_MAINTENANCE": true,
+    "SITE_MAINTENANCE": false,
 
     "BLOCK_ACCOUNT_REGISTRATION": false,
     "BLOCK_ACCOUNT_LOGIN": false,
@@ -18,17 +18,17 @@
     "DB_PASSWORD": "",
     "DB_NAME": "foxxy",
 
-    "TRIPAY_SANDBOX": true,
-    "TRIPAY_API_KEY": "",
-    "TRIPAY_PRIVATE_KEY": "",
-    "TRIPAY_MERCHANT_CODE": "",
+    "TRIPAY_SANDBOX": false,
+    "TRIPAY_API_KEY": "a2IprkS19ZTV96yJ0eu5e0Z5OrKlsZRPri7F0Z5h",
+    "TRIPAY_PRIVATE_KEY": "1O8H5-RAirO-JamQv-f0bQk-9HaXq",
+    "TRIPAY_MERCHANT_CODE": "T1970",
 
     "SMTP": {
-        "host": "",
+        "host": "smtp-relay.sendinblue.com",
         "port": 587,
         "auth": {
-            "user": "",
-            "pass": ""
+            "user": "mraflymaulana@gmail.com",
+            "pass": "xsmtpsib-26e968d482d2c840d93a251cc4cd3aa15c589cd932cd8bf839fcdbba4b127cd4-NKbwF68S9tL1Gv7r"
         }
     }
 }

@@ -21,6 +21,7 @@ module.exports = {
             res.setHeader('Content-Type', 'application/json');
             return res.end(JSON.stringify(payments, null, 3));
         } catch (error) {
+            console.log(error)
             return res.send({
                 message: "Error Happened.",
                 status: 500
