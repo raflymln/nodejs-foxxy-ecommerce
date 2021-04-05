@@ -11,7 +11,8 @@ bot.on("ready", () => { // When the bot is ready
 });
 
 bot.registerCommand("blockip", (msg, args) => { // Make an echo command
-    if (msg.user.id !== '231721153444446208' || msg.user.id !== '499021389572079620') return 'gabisa';
+    if (args.length === 0) return;
+    if (msg.member.id !== '231721153444446208' || msg.member.id !== '499021389572079620') return 'gabisa';
 
     for (const ip of args) {
         const blockip = execute(`iptables -A INPUT -s ${ip} -j DROP`);
