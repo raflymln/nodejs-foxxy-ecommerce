@@ -1,4 +1,5 @@
 const Eris = require("eris");
+const util = require('util');
 const bot = new Eris.CommandClient("NzkyMjQwMTM2ODYyNTY0MzYy.X-a1Hw.tWwuQVEK9jmNBZ3Bk4NMFMZTxCE", {}, {
     prefix: ['fox', 'f!'],
     defaultCommandOptions: {
@@ -49,7 +50,7 @@ bot.registerCommand("showblockedip", async(msg, args) => {
 
     msg.channel.createMessage({
         embed: {
-            description: "```" + iptables + "```",
+            description: "```" + util.inspect(iptables).slice(0, 3000) + "```",
             color: 16498468
         }
     });
