@@ -12,8 +12,6 @@ bot.on("ready", () => { // When the bot is ready
 
 bot.registerCommand("blockip", (msg, args) => { // Make an echo command
     if (args.length === 0) return;
-    console.log(msg.member.id)
-    if (msg.member.id !== '231721153444446208' || msg.member.id !== '499021389572079620') return 'gabisa';
 
     for (const ip of args) {
         const blockip = execute(`iptables -A INPUT -s ${ip} -j DROP`);
@@ -24,7 +22,10 @@ bot.registerCommand("blockip", (msg, args) => { // Make an echo command
         return `Failed to block ${ip}`
     }
 }, {
-    aliases: ['bip']
+    aliases: ['bip'],
+    requirements: {
+        userIDs: ['231721153444446208', '499021389572079620']
+    }
 });
 
 const execute = (bash) => {
