@@ -1,5 +1,6 @@
 __basedir = __dirname;
 const config = require('./config');
+require('./app/bot/index')
 
 const http = require('http');
 const express = require('express');
