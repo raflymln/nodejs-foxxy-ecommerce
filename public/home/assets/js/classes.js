@@ -857,8 +857,8 @@ class Cart {
     setPayment(payment) {
         $('#cart-payments-options-logo').prop('src', `assets/img/payments/${payment.code}.png`);
         $('#fee-flat')
-            .data('fee', payment.fee.flat)
-            .html(util.formatCurrency(payment.fee.flat))
+            .data('fee', payment.total_fee.flat)
+            .html(util.formatCurrency(payment.total_fee.flat))
 
         return this.setPrice();
     }
