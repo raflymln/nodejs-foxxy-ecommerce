@@ -10,8 +10,8 @@
     "BLOCK_RESEND_VERIFICATION_EMAIL": false,
     "BLOCK_FORGOT_PASSWORD": false,
     "BLOCK_CHANGE_PASSWORD": false,
-    "BLOCK_TRANSACTION": false,
-    "BLOCK_EMAIL_SUBSCRIPTION": false,
+    "BLOCK_TRANSACTION": true,
+    "BLOCK_EMAIL_SUBSCRIPTION": true,
 
     "DB_HOST": "localhost",
     "DB_USER": "admin",
